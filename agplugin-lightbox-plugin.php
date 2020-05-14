@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: LightBox-AGPlugin
-Plugin URI: gautierantoine.com
+Plugin URI: https://github.com/Pepite61/agplugin-lightbox
 Description: Plugin for the gallery in WordPress
 Version: 0.00.01
 
