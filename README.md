@@ -1,7 +1,14 @@
 # agplugin-lightbox
+=== LightBox - AG ===
+Author: Antoine GAUTIER
+Tags: lightbox, gallery, navigation
+Requires at least: 5.2
+License: GPLv3
+
+== Description ==
 Add a gallery navigation to WordPress
 
-After installing the plugin. You'll have a new menu in your admin page "AGPlugin". 
+After installing the plugin. You'll have a new menu in your admin page "AGPlugin".
 It will have a "lightbox" menu. Here you'll be able to change the icons for your lightbox.
 
     for the arrow icon (next, previous)
