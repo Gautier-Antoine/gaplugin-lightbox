@@ -1,5 +1,5 @@
 <?php
-namespace AGPlugin;
+namespace GAPlugin;
 /**
 * Class LightBox
 * manage the gallery
@@ -21,7 +21,7 @@ class LightBox extends AdminPage{
       /**
       * @var string name for the plugin folder
       */
-      FOLDER = 'agplugin-lightbox';
+      FOLDER = 'gaplugin-lightbox';
 
     public static function getfolder(){
       return plugin_dir_url( __DIR__ );

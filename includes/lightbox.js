@@ -8,7 +8,7 @@ class Lightbox{
   static init () {
     //use data-full-url instead of src
     //.querySelector('.wp-block-gallery')
-    const links = Array.from(document.querySelectorAll('img[src$=".png"], img[src$=".jpg"], img[src$=".jpeg"]'))
+    const links = Array.from(document.querySelector('.wp-block-gallery').querySelectorAll('img[src$=".png"], img[src$=".jpg"], img[src$=".jpeg"]'))
       const gallery = links.map(link => link.getAttribute('src'))
       links.forEach(link => link.addEventListener('click', e => {
         e.preventDefault()
