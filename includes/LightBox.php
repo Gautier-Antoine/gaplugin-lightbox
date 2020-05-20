@@ -40,16 +40,36 @@ class LightBox extends AdminPage{
       wp_register_script(static::FILE . '-js', static::getFolder() . 'includes/' . static::FILE . '.js', [], false, true);
       wp_enqueue_script(static::FILE . '-js');
 
-      if (get_option(static::PAGE . '-icon-arrow') || get_option(static::PAGE . '-icon-cross')) {
-        wp_register_style(static::FILE . '-php', static::getFolder() . 'includes/' . static::FILE . '-css.php');
-        wp_enqueue_style(static::FILE . '-php');
+      if (get_option(static::PAGE . '-icon-arrow')) {
+        wp_enqueue_style(static::FILE . '-php', static::getFolder() . 'includes/' . static::FILE . '-css.php' );
+        $arrow = esc_url( get_option(static::PAGE . '-icon-arrow') );
+        $custom_arrow = ".lightbox__prev, .lightbox__next {
+                          background: url($arrow);
+                          background-size: auto;
+                          background-repeat: no-repeat;
+                          background-position: center center;
+                        }";
+        wp_add_inline_style( static::FILE . '-php', $custom_arrow );
+      }
+      if (get_option(static::PAGE . '-icon-cross')) {
+
+        wp_enqueue_style(static::FILE . '-php', static::getFolder() . 'includes/' . static::FILE . '-css.php' );
+        $cross = esc_url( get_option(static::PAGE . '-icon-cross') );
+        $custom_cross = ".lightbox__close {
+                          background: url($cross);
+                          background-size: auto;
+                          background-repeat: no-repeat;
+                          background-position: center center;
+                        }";
+        wp_add_inline_style( static::FILE . '-php', $custom_cross );
       }
     }
     public static function registerAdminScripts() {
     }
 
       public static function register () {
-          add_action( 'enqueue_block_assets', [static::class, 'registerPublicScripts']);
+        add_action( 'wp_enqueue_scripts', [static::class, 'registerPublicScripts']);
+        // add_action( 'enqueue_block_assets', [static::class, 'registerPublicScripts']);
           add_action('admin_enqueue_scripts', [static::class, 'AdminScripts']);
           add_action('admin_init', [static::class, 'registerSettings']);
           add_action('admin_menu', [static::class, 'addMenu']);
