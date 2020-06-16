@@ -39,6 +39,8 @@ class LightBox extends AdminPage{
       wp_enqueue_style(static::FILE);
       wp_register_script(static::FILE . '-js', static::getFolder() . 'includes/' . static::FILE . '.js', [], false, true);
       wp_enqueue_script(static::FILE . '-js');
+      wp_register_script(static::FILE . '-one-js', static::getFolder() . 'includes/' . static::FILE . '-one.js', [], false, true);
+      wp_enqueue_script(static::FILE . '-one-js');
 
       if (get_option(static::PAGE . '-icon-arrow')) {
         wp_enqueue_style(static::FILE . '-php', static::getFolder() . 'includes/' . static::FILE . '-css.php' );
@@ -79,8 +81,9 @@ class LightBox extends AdminPage{
       printf(
         __( 'The %1$s is activated', static::LANGUAGE) . '<br><br>' .
         __( 'Add the full url to modify the %1$s', static::LANGUAGE) . ' (https://www.example.com/img.svg) <br>' .
-        __( 'If empty will show the normal icon', static::LANGUAGE) . '<br><br>'
-        , 'LightBox'
+        __( 'If empty will show the normal icon', static::LANGUAGE) . '<br>' .
+        __( 'To use the %1$s for one picture, add the %2$s to the image (ex: thumbnails on the post page)', static::LANGUAGE) . '<br><br>'
+        , 'LightBox', 'class="lightbox-one"'
       );
     }
     public static function addPageFunction($args) {
