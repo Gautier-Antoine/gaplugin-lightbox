@@ -3,7 +3,7 @@
 Plugin Name: LightBox-GA
 Plugin URI: https://github.com/Pepite61/gaplugin-lightbox
 Description: Plugin for the gallery in WordPress
-Version: 0.00.01
+Version: 0.00.02
 
 Requires at least: 5.2
 Requires PHP: 7.2

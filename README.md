@@ -7,7 +7,7 @@ Tags: lightbox, gallery, navigation, images
 Requires at least: 5.2
 Tested up to: 5.4
 Requires PHP: 7.2
-Stable tag: 0.00.01
+Stable tag: 0.00.02
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -32,3 +32,12 @@ Take a look at my website [GautierAntoine.com](https://gautierantoine.com)
 1. Install the plugin.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. In the "GAPlugin" Menu in your admin panel, you can select your icons if you want to change them.
+
+== Changelog ==
+
+= 0.00.01 =
+* Work for wordpress gallery.
+* Select your icons.
+
+= 0.00.02 =
+* You can use the class lightbox-one
