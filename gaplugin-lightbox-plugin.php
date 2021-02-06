@@ -1,9 +1,12 @@
 <?php
+/**
+ * @package GAP-LightBox
+ */
 /*
-Plugin Name: LightBox-GA
-Plugin URI: https://github.com/Pepite61/gaplugin-lightbox
+Plugin Name: GAP-LightBox
+Plugin URI: https://github.com/Gautier-Antoine/gaplugin-lightbox
 Description: Plugin for the gallery in WordPress
-Version: 0.00.02
+Version: 0.01.00.00
 
 Requires at least: 5.2
 Requires PHP: 7.2
@@ -42,7 +45,10 @@ add_filter( 'rest_authentication_errors', function( $result ) {
   if (!class_exists('GAPlugin\AdminPage')){
     require_once 'includes/AdminPage.php';
   }
-  require_once 'includes/LightBox.php';
+  if (!class_exists('GAPlugin\LightBox')){
+    require_once 'includes/LightBox.php';
+  }
+
   register_uninstall_hook( __FILE__, ['GAPlugin\LightBox', 'removeOptions']);
   add_action(
     'init',

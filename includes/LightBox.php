@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package GAP-LightBox
+ */
 namespace GAPlugin;
 /**
 * Class LightBox
@@ -30,8 +33,8 @@ class LightBox extends AdminPage{
     * @var array list of social medias
     */
     public static $list = [
-      ['name' => 'icon-arrow'],
-      ['name' => 'icon-cross']
+      ['label_for' => 'icon-arrow'],
+      ['label_for' => 'icon-cross']
     ];
 
     public static function registerPublicScripts () {
@@ -81,8 +84,9 @@ class LightBox extends AdminPage{
       printf(
         __( 'The %1$s is activated', static::LANGUAGE) . '<br><br>' .
         __( 'Add the full url to modify the %1$s', static::LANGUAGE) . ' (https://www.example.com/img.svg) <br>' .
-        __( 'If empty will show the normal icon', static::LANGUAGE) . '<br>' .
-        __( 'To use the %1$s for one picture, add the %2$s to the image (ex: thumbnails on the post page)', static::LANGUAGE) . '<br><br>'
+        __( 'If it remain empty, the %1$s will use the default icon', static::LANGUAGE) . '<br>' .
+        __( 'To use the %1$s for one picture, add the %2$s to the image (ex: thumbnails on the post page)', static::LANGUAGE) . '<br><br>' .
+        __( 'It will also appear on the WordPress galleries', static::LANGUAGE)
         , 'LightBox', 'class="lightbox-one"'
       );
     }
@@ -90,9 +94,10 @@ class LightBox extends AdminPage{
         ?>
           <textarea
             name="<?= static::PAGE . '-' . $args['class'] ?>"
+            id="<?= $args['label_for'] ?>"
             cols="30"
             rows= "1"
-            title="<?php printf(__('Put your %1$s URL', static::LANGUAGE), $args['class']) ?>"
+            title="<?php printf(__('Put your %1$s URL', static::LANGUAGE), $args['label_for']) ?>"
           ><?=
               esc_url(get_option(static::PAGE . '-' . $args['class']))
           ?></textarea>

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package GAP-LightBox
+ */
 namespace GAPlugin;
 /**
 * Class AdminPage
@@ -11,6 +14,10 @@ class AdminPage {
     * @var string name of the page
     */
     PAGE = '',
+    /**
+    * @var string name for the option
+    */
+    OPTION = '',
     /**
     * @var string name for the language files
     */
@@ -36,7 +43,7 @@ class AdminPage {
     /**
     * @var string name for the admin page
     */
-    ADMINPAGE = 'ga-admin-page';
+    ADMINPAGE = 'gap-admin-page';
 
   public static function getfolder(){
     return plugin_dir_url( __DIR__ );
@@ -55,7 +62,7 @@ class AdminPage {
   public static function removeExtraOptions() {}
   public static function removeOptions(){
     foreach (static::$list as $option) {
-      delete_option(static::PAGE . '-' . strtolower($option['name']));
+      delete_option(static::PAGE . '-' . strtolower($option['label_for']));
     }
     static::removeExtraOptions();
   }
@@ -75,7 +82,7 @@ class AdminPage {
         add_action('admin_enqueue_scripts', [static::class, 'AdminScripts']);
         add_action('admin_init', [static::class, 'registerSettings']);
         add_action('admin_menu', [static::class, 'addMenu']);
-        add_shortcode(static::PAGE . '-nav', [static::class, 'ShortcodeNav']);
+        add_shortcode('GAP-' . static::PAGE, [static::class, 'ShortcodeNav']);
         load_plugin_textdomain(static::LANGUAGE, false, static::FOLDER . '/languages/' );
     }
     /**
@@ -94,8 +101,8 @@ class AdminPage {
             static::PAGE . static::EXTENSION
           );
           static::getExtraSettings();
-          foreach (static::$list as $name){
-              $class = strtolower($name['name']);
+          foreach (static::$list as $option){
+              $class = strtolower($option['label_for']);
               $title = static::PAGE . static::EXTENSION . '_' . $class;
               register_setting(
                 static::PAGE . static::EXTENSION,
@@ -103,11 +110,14 @@ class AdminPage {
               );
               add_settings_field(
                 $title,
-                $name['name'],
+                $option['label_for'],
                 [static::class, 'addPageFunction'],
                 static::PAGE . static::EXTENSION,
                 static::PAGE . static::EXTENSION . '_section',
-                ['class' => $class]
+                [
+                  'label_for' => $option['label_for'],
+                  'class' => $class
+                ]
               );
           }
     }
@@ -119,7 +129,8 @@ class AdminPage {
               'manage_options',
               static::ADMINPAGE,
               [static::class,'GAPlugin_admin_page'],
-              'dashicons-share',
+              static::getFolder() . 'images/icon.svg',
+              // 'dashicons-share',
               30
           );
       }
@@ -153,5 +164,18 @@ class AdminPage {
             ?>
         </form>
         <?php
+    }
+
+    /**
+     * Activate plugin
+     */
+    public static function Activate() {
+      flush_rewrite_rules();
+    }
+    /**
+     * Deactivate plugin
+     */
+    public static function Deactivate() {
+      flush_rewrite_rules();
     }
 }
